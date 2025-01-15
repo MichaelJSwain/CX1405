@@ -1,16 +1,37 @@
 const isSelected = [];
 
+const getSelectedSize = () => {
+    let res = '';
+    isSelected.forEach(param => {
+        res += `${Object.keys(param)[0]} `;
+    })
+    return res;
+}
+
 const renderButtonText = () => {
-    console.log('is selected => ', JSON.stringify(isSelected));
+    
     const val = JSON.stringify(isSelected);
-    if (!val.includes("{}")) {
-        if (val.includes("oos")) {
-            document.querySelector('[data-testid*="pdpActionButton"] [class*="ProductActions_AddToBagButtonText"]').textContent = "NOTIFY ME";
+    console.log(val);
+    
+    if (!document.querySelector('[data-testid="pdpActionButton-itemAdded-pvh-button"]') && !document.querySelector('[data-testid*="pdpActionButton"][disabled]')) {
+        if (!val.includes("{}")) {
+            if (document.querySelector('[data-testid="pdpActionButton-notifyMe-pvh-button"]')) {
+                document.querySelector('[data-testid*="pdpActionButton"] [class*="ProductActions_AddToBagButtonText"]').textContent = "NOTIFY ME";
+            } else {
+                const selectedSize = getSelectedSize();
+                console.log('selected size ===> ', isSelected);
+                console.log(document.querySelector('[data-testid*="pdpActionButton"] [class*="ButtonText"]'))
+                optimizely.utils.waitForElement('[data-testid*="pdpActionButton"] [class*="ProductActions_AddToBagButtonText"]')
+                    .then(elem => {
+                        document.querySelector('[data-testid*="pdpActionButton"] [class*="ProductActions_AddToBagButtonText"]').textContent = `ADD TO BAG ・ SIZE ${selectedSize}`;
+                    })
+                    
+                
+                
+            }
         } else {
-            document.querySelector('[data-testid*="pdpActionButton"] [class*="ProductActions_AddToBagButtonText"]').textContent = "ADD TO BAG";
+            document.querySelector('[data-testid*="pdpActionButton"] [class*="ProductActions_AddToBagButtonText"]').textContent = "SELECT A SIZE";
         }
-    } else {
-        document.querySelector('[data-testid*="pdpActionButton"] [class*="ProductActions_AddToBagButtonText"]').textContent = "SELECT A SIZE";
     }
 }
 
@@ -28,11 +49,9 @@ optimizely.utils.waitForElement('[class*="ProductSizeSelector_SizeList_"]')
                 if (mutation.type === "attributes" && mutation.target.classList.value.includes('SizeButton')) {
                     
                     if (mutation.target.classList.value.includes('SizeSelected')) {
-                        isSelected[idx][mutation.target.textContent] = mutation.target.classList.value.includes('ProductSize_IsOos') ? 'oos' : 'is';
+                        isSelected[idx][mutation.target.textContent] = mutation.target.classList.value.includes('ProductSize_IsOos') ? 'outOfStock' : 'inStock';
                     } else if (mutation.oldValue.includes('SizeSelected')) {
-                        
                         delete isSelected[idx][mutation.target.textContent];
-                        
                     }
                     renderButtonText();
                 }
