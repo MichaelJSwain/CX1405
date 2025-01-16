@@ -16,17 +16,15 @@ const renderButtonText = () => {
     if (!document.querySelector('[data-testid="pdpActionButton-itemAdded-pvh-button"]') && !document.querySelector('[data-testid*="pdpActionButton"][disabled]')) {
         if (!val.includes("{}")) {
             if (document.querySelector('[data-testid="pdpActionButton-notifyMe-pvh-button"]')) {
+                console.log("NOTIFY ME");
                 document.querySelector('[data-testid*="pdpActionButton"] [class*="ProductActions_AddToBagButtonText"]').textContent = "NOTIFY ME";
             } else {
                 const selectedSize = getSelectedSize();
                 console.log('selected size ===> ', isSelected);
                 console.log(document.querySelector('[data-testid*="pdpActionButton"] [class*="ButtonText"]'))
-                optimizely.utils.waitForElement('[data-testid*="pdpActionButton"] [class*="ProductActions_AddToBagButtonText"]')
-                    .then(elem => {
-                        document.querySelector('[data-testid*="pdpActionButton"] [class*="ProductActions_AddToBagButtonText"]').textContent = `ADD TO BAG ・ SIZE ${selectedSize}`;
-                    })
-                    
-                
+                setTimeout(() => {
+                    document.querySelector('[data-testid*="pdpActionButton"] [class*="ButtonText"]').textContent = `ADD TO BAG ・ SIZE ${selectedSize}`;
+                }, 2000);
                 
             }
         } else {

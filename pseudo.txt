@@ -1,0 +1,10 @@
+Scenario: Single size param product e.g. 'S', 'M', 'L'
+- page loads and no sizes are selected - button text = "Select a size"
+- User selects a size - button text = "Add to Bag" (v1) / "Add to bag - size <size>" (v2)
+- User selects an oos size - button text = "Notify me" + notify me functionality
+- User deselects a selected size - button text = "Select a size"
+- User clicks add to bag cta and adds product to the bag - button text = "Item added"
+- After Item has been added - 
+    - Size is selected - button text = "Add to Bag" (v1) / "Add to bag - size <size>" (v2)
+    - Size is not selected - button text = "Select a size"
+    - OOS size is selected - button text = "Add to bag" (disabled)
