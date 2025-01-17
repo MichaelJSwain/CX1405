@@ -62,7 +62,7 @@ const CX1405 = {
 
             const observer = new MutationObserver(callback);
             observer.observe(param, config);
-                    })
+                    });
     },
     setSelectedSizes: (mutation, idx) => {
         if (mutation.target.classList.value.includes('SizeSelected')) {
@@ -127,7 +127,7 @@ const CX1405 = {
 
         optimizely.utils.observeSelector('[data-testid*="stickyAddToBagButton"] [class*="StickyAddToBag_AddToBagButtonText"]', stickyButton => {
             CX1405.renderButtonText();
-        })
+        });
     }
-}
+};
 CX1405.init();
