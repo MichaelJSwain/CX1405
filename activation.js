@@ -13,7 +13,7 @@ function callbackFn(activate, options) {
                     if (document.querySelector('[data-testid="ProductSize-component"] button').getAttribute('data-testid').indexOf('One Size') < 0) {
                         activate();
                     }
-                })
+                });
         }
     });
 }
