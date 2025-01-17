@@ -2,19 +2,17 @@ optimizely.utils.waitForElement('[data-testid*="pdpActionButton"]')
     .then(button => {
         button.addEventListener('click', () => {
             if (button.textContent.toLowerCase() === 'add to bag') {
-                console.log(`CX1405 - Clicks on Add to bag CTA`);
+                optimizely.sendAnalyticsEvents(`CX1405 - Clicks on Add to bag CTA`);
             } else if (button.textContent.toLowerCase() === 'select a size') {
-                console.log(`CX1405 - Clicks on Select size CTA`);
+                optimizely.sendAnalyticsEvents(`CX1405 - Clicks on Select size CTA`);
             }
-        })
-    })
-
+        });
+    });
 optimizely.utils.observeSelector('[data-testid="selectSizeError"]', () => {
-    console.log("CX1405 - ‘Please select a size’ message is shown")
+    optimizely.sendAnalyticsEvents("CX1405 - ‘Please select a size’ message is shown");
 });
-
 optimizely.utils.waitForElement('[data-testid="pdp-size-guide"]', sizeGuide => {
     sizeGuide.addEventListener('click', () => {
-        console.log("CX1405 - Clicks on ‘size guide’");
+        optimizely.sendAnalyticsEvents("CX1405 - Clicks on ‘size guide’");
     });
-})
+});
