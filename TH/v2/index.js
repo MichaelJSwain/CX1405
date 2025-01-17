@@ -37,7 +37,7 @@ const CX1405 = {
     getSelectedSize: () => {
         let res = '';
         CX1405.sizeParams.forEach(param => {
-            res += `${Object.keys(param)[0]} `;
+            res += res.length ? ` / ${Object.keys(param)[0]}` : `${Object.keys(param)[0]}`;
         })
         return res;
     },

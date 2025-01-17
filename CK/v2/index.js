@@ -37,7 +37,7 @@ const CX1405 = {
     getSelectedSize: () => {
         let res = '';
         CX1405.sizeParams.forEach(param => {
-            res += `${Object.keys(param)[0]} `;
+            res += res.length ? ` / ${Object.keys(param)[0]}` : `${Object.keys(param)[0]}`;
         })
         return res;
     },
@@ -49,7 +49,7 @@ const CX1405 = {
         if (!selectedSizes.includes("{}")) {
             const isInStock = CX1405.checkInStock();
             if (isInStock) {
-                buttonText = `Add To Bag Size ${userSelection}`;
+                buttonText = `Add To Bag・Size ${userSelection}`;
             } else {
                 buttonText = `Notify Me`;
             }
