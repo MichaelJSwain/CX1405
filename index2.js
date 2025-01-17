@@ -1,10 +1,10 @@
 const CX1405 = {
-    selectedSizes: [],
+    sizeParams: [],
     observeSizeSelection: () => {
         const sizeParams = document.querySelectorAll('[class*="ProductSizeSelector_SizeList_"]');
 
         sizeParams.forEach((param, idx) => {
-            CX1405.selectedSizes.push({});
+            CX1405.sizeParams.push({});
 
             const config = { attributes: true, childList: true, subtree: true, attributeOldValue: true };
 
@@ -31,22 +31,22 @@ const CX1405 = {
     },
     setSelectedSizes: (mutation, idx) => {
         if (mutation.target.classList.value.includes('SizeSelected')) {
-            CX1405.selectedSizes[idx][mutation.target.textContent] = mutation.target.classList.value.includes('ProductSize_IsOos') ? 'outOfStock' : 'inStock';
+            CX1405.sizeParams[idx][mutation.target.textContent] = mutation.target.classList.value.includes('ProductSize_IsOos') ? 'outOfStock' : 'inStock';
         } else if (mutation.oldValue.includes('SizeSelected')) {
-            delete CX1405.selectedSizes[idx][mutation.target.textContent];
+            delete CX1405.sizeParams[idx][mutation.target.textContent];
         }
-        // console.log("set selected size => ", CX1405.selectedSizes);
+        // console.log("set selected size => ", CX1405.sizeParams);
     },
     getSelectedSize: () => {
         let res = '';
-        CX1405.selectedSizes.forEach(param => {
+        CX1405.sizeParams.forEach(param => {
             res += `${Object.keys(param)[0]} `;
         })
         return res;
     },
     getButtonText: () => {
         let buttonText = '';
-        const selectedSizes = JSON.stringify(CX1405.selectedSizes);
+        const selectedSizes = JSON.stringify(CX1405.sizeParams);
         const userSelection = CX1405.getSelectedSize();
 
         if (!selectedSizes.includes("{}")) {
@@ -67,7 +67,7 @@ const CX1405 = {
     },
     checkInStock: () => {
         let res = true;
-        CX1405.selectedSizes.forEach(param => {
+        CX1405.sizeParams.forEach(param => {
             if (JSON.stringify(param).includes('outOfStock')) {
                 res = false;
             }
@@ -103,13 +103,9 @@ const CX1405 = {
         observer.observe(target, config);
     },
     init: () => {
-   
-        optimizely.utils.waitForElement('[class*="ProductSizeSelector_SizeList_"]')
-            .then(() => {
-                CX1405.observeSizeSelection();
-                CX1405.observeButtonMutations();
-                CX1405.renderButtonText();
-            });
+        CX1405.observeSizeSelection();
+        CX1405.observeButtonMutations();
+        CX1405.renderButtonText();
 
         optimizely.utils.observeSelector('[data-testid*="stickyAddToBagButton"] [class*="StickyAddToBag_AddToBagButtonText"]', stickyButton => {
             CX1405.renderButtonText();

@@ -5,9 +5,12 @@ function callbackFn(activate, options) {
         window.__NEXT_DATA__.page;
     }).then(() => {
         if (window.__NEXT_DATA__.page === "/pdp") {
-            optimizely.utils.waitForElement('[data-testid*="button-size"]')
-                .then(sizeButton => {
-                    if (sizeButton.getAttribute('data-testid').indexOf('One Size') < 0) {
+            optimizely.utils.waitUntil(() => {
+                return document.querySelectorAll('[class*="ProductSizeSelector_SizeList"]').length &&   
+                document.querySelectorAll('[data-testid*="button-size"]').length;
+            })
+                .then(() => {
+                    if (document.querySelector('[data-testid="ProductSize-component"] button').getAttribute('data-testid').indexOf('One Size') < 0) {
                         activate();
                     }
                 })
