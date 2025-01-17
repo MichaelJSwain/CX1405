@@ -1,9 +1,7 @@
 optimizely.utils.waitForElement('[data-testid*="pdpActionButton"]')
     .then(button => {
         button.addEventListener('click', () => {
-            if (button.textContent.toLowerCase() === 'add to bag') {
-                optimizely.sendAnalyticsEvents(`CX1405 - Clicks on Add to bag CTA`);
-            } else if (button.textContent.toLowerCase() === 'select a size') {
+            if (button.textContent.toLowerCase() === 'select a size') {
                 optimizely.sendAnalyticsEvents(`CX1405 - Clicks on Select size CTA`);
             }
         });
