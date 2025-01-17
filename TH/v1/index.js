@@ -1,4 +1,41 @@
 const CX1405 = {
+    copy: {
+        gb: {
+            prompt: 'Select A Size',
+            a2b: 'Add To Bag',
+            notify: 'Notify Me'
+        },
+        nl: {
+            prompt: 'Selecteer een maat',
+            a2b: 'Toevoegen',
+            notify: 'Waarschuw mij'
+        },
+        de: {
+            prompt: 'Wähle eine Größe aus',
+            a2b: 'Hinzufügen',
+            notify: 'Benachrichtigen Sie mich'
+        },
+        fr: {
+            prompt: 'Sélectionnez une taille',
+            a2b: 'Ajouter Au Panier',
+            notify: "M'informer"
+        },
+        it: {
+            prompt: 'Seleziona una taglia',
+            a2b: 'Aggiungi Al Carrello',
+            notify: 'Avvisami'
+        },
+        es: {
+            prompt: 'Selecciona una talla',
+            a2b: 'Añadir A La Cesta',
+            notify: 'Notifícame'
+        },
+        pl: {
+            prompt: 'Wybierz rozmiar',
+            a2b: 'Dodaj Do Koszyka',
+            notify: 'Powiadom mnie'
+        }
+    }[window.__NEXT_DATA__.props.pageProps.initialState.currentStore.target],
     sizeParams: [],
     observeSizeSelection: () => {
         const sizeParams = document.querySelectorAll('[class*="ProductSizeSelector_SizeList_"]');
@@ -40,14 +77,9 @@ const CX1405 = {
 
         if (!selectedSizes.includes("{}")) {
             const isInStock = CX1405.checkInStock();
-            if (isInStock) {
-                buttonText = `Add To Bag`;
-            } else {
-                buttonText = `Notify Me`;
-            }
-            
+            buttonText = isInStock ? CX1405.copy.a2b : CX1405.copy.notify;
         } else {
-            buttonText = `Select A Size`;
+            buttonText = CX1405.copy.prompt;
         }
         return buttonText;
     },
