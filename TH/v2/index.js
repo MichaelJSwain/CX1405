@@ -17,22 +17,22 @@ const CX1405 = {
         },
         fr: {
             prompt: 'Sélectionnez une taille',
-            a2b: 'Ajouter Au Panier・Taille',
+            a2b: 'Ajouter la taille',
             notify: "M'informer"
         },
         it: {
             prompt: 'Seleziona una taglia',
-            a2b: 'Aggiungi Al Carrello・Taglia',
+            a2b: 'Aggiungi la taglia',
             notify: 'Avvisami'
         },
         es: {
             prompt: 'Selecciona una talla',
-            a2b: 'Añadir A La Cesta・Talla',
+            a2b: 'Añadir talla',
             notify: 'Notifícame'
         },
         pl: {
             prompt: 'Wybierz rozmiar',
-            a2b: 'Dodaj Do Koszyka・Rozmiar',
+            a2b: 'Dodaj rozmiar',
             notify: 'Powiadom mnie'
         }
     }[window.__NEXT_DATA__.props.pageProps.initialState.currentStore.target],
