@@ -1,7 +1,7 @@
 const CX1405 = {
     copy: {
         gb: {
-            prompt: 'Select A Size',
+            prompt: 'Select a size',
             a2b: 'Add To Bag',
             notify: 'Notify Me'
         },
